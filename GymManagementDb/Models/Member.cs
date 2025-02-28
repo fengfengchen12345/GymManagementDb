@@ -10,11 +10,11 @@
 
         public DateTime Join_Date { get; set; }
 
-        public Location Location { get; set; }
+        public Locations Locations { get; set; }
 
         public MemberShipType MemberShipType { get; set; }
 
-        public Contact Contact { get; set; }
+        public Contacts Contacts { get; set; }
 
         public string Phone_Number { get; set; }
 

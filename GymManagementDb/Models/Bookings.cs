@@ -12,12 +12,18 @@
 
         public int TrainerID { get; set; }
 
-        public TrainerID TrainerID { get; set; }
+        public Trainers Trainers { get; set; }
         
         public DateTime Date { get; set; }
 
         public decimal Duration { get; set; }
 
         public DateTime Time { get; set; }
+
+        public Payments Payments { get; set; }
+
+        public int PaymentID { get; set; }
+
+        public string Status { get; set; }
     }
 }

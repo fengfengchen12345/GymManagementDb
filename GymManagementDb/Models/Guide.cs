@@ -5,7 +5,7 @@ namespace GymManagementDb.Models
 {
     public class Guide
     {
-        [On The one side of the relationship, use public ICollection
-        On the many side of the relationship, use public Name Name { get; set; } + the public int NameID of the table
+        /*[On The one side of the relationship, use public ICollection]
+        [On the many side of the relationship, use public Name Name { get; set; } + the public int NameID of the table]*/
 }
 }
