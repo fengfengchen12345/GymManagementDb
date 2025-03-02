@@ -10,8 +10,6 @@
 
         public decimal Duration { get; set; }
 
-        public decimal Duration { get; set; }
-
-        public ICollection<Member> Members 
+        public ICollection<Member> Members { get; set; }
     }
 }

@@ -10,7 +10,7 @@
 
         public decimal Duration { get; set; }
 
-        public ICollection<Member> { get; set; }
+        public ICollection<Member> Member { get; set; }
 
         public Bookings Bookings { get; set; }
 
