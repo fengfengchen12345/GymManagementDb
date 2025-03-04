@@ -7,19 +7,25 @@ namespace GymManagementDb.Models
         [Key]
         public int LocationID { get; set; }
 
-        [Required]
+
+        [Required(ErrorMessage = "Address is required.")]
+        [StringLength(200, ErrorMessage = "Address cannot exceed 200 characters.")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "City is required.")]
+        [StringLength(100, ErrorMessage = "City cannot exceed 100 characters.")]
         public string City { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Postcode is required.")]
         [DataType(DataType.PostalCode)]
-        public decimal Postcode { get; set; }
 
-        [Required]
+        public int Postcode { get; set; }
+
+        [Required(ErrorMessage = "Suburb is required.")]
+        [StringLength(100, ErrorMessage = "Suburb cannot exceed 100 characters.")]
         public string Suburb { get; set; }
 
+        
         public ICollection<Member> Members { get; set; }
     }
 }

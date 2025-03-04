@@ -7,18 +7,18 @@ namespace GymManagementDb.Models
         [Key]
         public int MembershipTypeID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
+
 
         [Required]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
+
         [Required]
-        [DataType(DataType.Duration)]
-        public decimal Duration { get; set; }
-
-
+        [Range(0,180)]
+        public int Duration { get; set; }
         public ICollection<Member> Members { get; set; }
     }
 }

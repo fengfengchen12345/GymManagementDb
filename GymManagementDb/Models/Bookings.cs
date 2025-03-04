@@ -6,9 +6,10 @@ namespace GymManagementDb.Models
     public class Bookings
     {
         [Key]
+
         public int BookingID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Member ID is required.")]
         public int MemberID { get; set; }
 
         [Required]
@@ -16,30 +17,32 @@ namespace GymManagementDb.Models
 
         public ICollection<Workouts> Workouts { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Trainer ID is required.")]
         public int TrainerID { get; set; }
 
         [ForeignKey("TrainerID")]
         public Trainers Trainers { get; set; }
 
+
         [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Date is required.")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; }
 
-        [Required]
+    
         [DataType(DataType.Duration)]
+        [Required(ErrorMessage = "Duration is required.")]
+        [Range(0.1, 24, ErrorMessage = "Duration must be between 0.1 and 24 hours.")]
         public decimal Duration { get; set; }
 
         [DataType(DataType.Time)]
-        [Required]
+        [Required(ErrorMessage = "Time is required.")]
         public DateTime Time { get; set; }
 
-        [ForeignKey("PaymentID")]
-        public Payments Payments { get; set; }
 
-        [Required]
-        public int PaymentID { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Status is required."), MaxLength(20)]
+        [StringLength(20, ErrorMessage = "Status cannot exceed 20 characters.")]
+        [RegularExpression(@"^(Pending|Confirmed|Cancelled)$", ErrorMessage = "Status must be either 'Pending', 'Confirmed', or 'Cancelled'.")]
         public string Status { get; set; }
     }
 }
