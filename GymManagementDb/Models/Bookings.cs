@@ -33,7 +33,7 @@ namespace GymManagementDb.Models
         [DataType(DataType.Duration)]
         [Required(ErrorMessage = "Duration is required.")]
         [Range(0.1, 24, ErrorMessage = "Duration must be between 0.1 and 24 hours.")]
-        public decimal Duration { get; set; }
+        public int Duration { get; set; }
 
         [DataType(DataType.Time)]
         [Required(ErrorMessage = "Time is required.")]
