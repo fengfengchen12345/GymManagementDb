@@ -23,11 +23,6 @@ namespace GymManagementDb.Models
         public DateTime Join_Date { get; set; }
 
 
-        [Required(ErrorMessage = "Location is required.")]
-        [ForeignKey("LocationID")]
-        public Location Location { get; set; }
-
-
         [Required(ErrorMessage = "Membership Type is required.")]
         [ForeignKey("MembershipTpyeID")]
         public MembershipType MemberShipType { get; set; }
