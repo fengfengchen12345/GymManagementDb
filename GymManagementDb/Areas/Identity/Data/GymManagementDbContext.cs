@@ -22,4 +22,14 @@ public class GymManagementDbContext : IdentityDbContext<GymManagementDbUser>
     }
 
 public DbSet<GymManagementDb.Models.Member> Member { get; set; } = default!;
+
+public DbSet<GymManagementDb.Models.Bookings> Bookings { get; set; } = default!;
+
+public DbSet<GymManagementDb.Models.MembershipType> MembershipType { get; set; } = default!;
+
+public DbSet<GymManagementDb.Models.Trainers> Trainers { get; set; } = default!;
+
+public DbSet<GymManagementDb.Models.TrainerSpecialty> TrainerSpecialty { get; set; } = default!;
+
+public DbSet<GymManagementDb.Models.Workouts> Workouts { get; set; } = default!;
 }
