@@ -37,7 +37,9 @@ namespace GymManagementDb.Models
         [StringLength(15, ErrorMessage = "Phone number cannot exceed 15 characters.")]
         public string Phone_Number { get; set; }
 
-        public ICollection<Workouts> Workouts { get; set; }
+        public Workouts Workouts { get; set; }
+        [ForeignKey("WorkoutID")]
+        public int WorkoutID { get; set; }
 
 
     }

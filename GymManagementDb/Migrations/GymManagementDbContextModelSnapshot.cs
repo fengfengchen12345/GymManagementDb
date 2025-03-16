@@ -87,43 +87,6 @@ namespace GymManagementDb.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("GymManagementDb.Models.Bookings", b =>
-                {
-                    b.Property<int>("BookingID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingID"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MemberID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TrainerID")
-                        .HasColumnType("int");
-
-                    b.HasKey("BookingID");
-
-                    b.HasIndex("MemberID");
-
-                    b.HasIndex("TrainerID");
-
-                    b.ToTable("Bookings");
-                });
-
             modelBuilder.Entity("GymManagementDb.Models.Member", b =>
                 {
                     b.Property<int>("MemberID")
@@ -158,14 +121,17 @@ namespace GymManagementDb.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int?>("TrainersTrainerID")
+                    b.Property<int>("WorkoutID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkoutsWorkoutID")
                         .HasColumnType("int");
 
                     b.HasKey("MemberID");
 
                     b.HasIndex("MembershipTpyeID");
 
-                    b.HasIndex("TrainersTrainerID");
+                    b.HasIndex("WorkoutsWorkoutID");
 
                     b.ToTable("Member");
                 });
@@ -239,9 +205,6 @@ namespace GymManagementDb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WorkoutID"));
 
-                    b.Property<int>("BookingID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
@@ -249,30 +212,21 @@ namespace GymManagementDb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TrainerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainersTrainerID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("WorkoutID");
 
-                    b.HasIndex("BookingID");
+                    b.HasIndex("TrainersTrainerID");
 
                     b.ToTable("Workouts");
-                });
-
-            modelBuilder.Entity("MemberWorkouts", b =>
-                {
-                    b.Property<int>("MemberID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutsWorkoutID")
-                        .HasColumnType("int");
-
-                    b.HasKey("MemberID", "WorkoutsWorkoutID");
-
-                    b.HasIndex("WorkoutsWorkoutID");
-
-                    b.ToTable("MemberWorkouts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -412,25 +366,6 @@ namespace GymManagementDb.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GymManagementDb.Models.Bookings", b =>
-                {
-                    b.HasOne("GymManagementDb.Models.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GymManagementDb.Models.Trainers", "Trainers")
-                        .WithMany("Bookings")
-                        .HasForeignKey("TrainerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Member");
-
-                    b.Navigation("Trainers");
-                });
-
             modelBuilder.Entity("GymManagementDb.Models.Member", b =>
                 {
                     b.HasOne("GymManagementDb.Models.MembershipType", "MemberShipType")
@@ -439,11 +374,15 @@ namespace GymManagementDb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GymManagementDb.Models.Trainers", null)
-                        .WithMany("Members")
-                        .HasForeignKey("TrainersTrainerID");
+                    b.HasOne("GymManagementDb.Models.Workouts", "Workouts")
+                        .WithMany("Member")
+                        .HasForeignKey("WorkoutsWorkoutID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("MemberShipType");
+
+                    b.Navigation("Workouts");
                 });
 
             modelBuilder.Entity("GymManagementDb.Models.TrainerSpecialty", b =>
@@ -459,28 +398,13 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("GymManagementDb.Models.Workouts", b =>
                 {
-                    b.HasOne("GymManagementDb.Models.Bookings", "Bookings")
+                    b.HasOne("GymManagementDb.Models.Trainers", "Trainers")
                         .WithMany("Workouts")
-                        .HasForeignKey("BookingID")
+                        .HasForeignKey("TrainersTrainerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Bookings");
-                });
-
-            modelBuilder.Entity("MemberWorkouts", b =>
-                {
-                    b.HasOne("GymManagementDb.Models.Member", null)
-                        .WithMany()
-                        .HasForeignKey("MemberID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GymManagementDb.Models.Workouts", null)
-                        .WithMany()
-                        .HasForeignKey("WorkoutsWorkoutID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Trainers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -534,11 +458,6 @@ namespace GymManagementDb.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GymManagementDb.Models.Bookings", b =>
-                {
-                    b.Navigation("Workouts");
-                });
-
             modelBuilder.Entity("GymManagementDb.Models.MembershipType", b =>
                 {
                     b.Navigation("Members");
@@ -546,11 +465,14 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("GymManagementDb.Models.Trainers", b =>
                 {
-                    b.Navigation("Bookings");
-
-                    b.Navigation("Members");
-
                     b.Navigation("TrainerSpecialty");
+
+                    b.Navigation("Workouts");
+                });
+
+            modelBuilder.Entity("GymManagementDb.Models.Workouts", b =>
+                {
+                    b.Navigation("Member");
                 });
 #pragma warning restore 612, 618
         }

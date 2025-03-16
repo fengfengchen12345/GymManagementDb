@@ -22,8 +22,7 @@ namespace GymManagementDb.Controllers
         // GET: Workouts
         public async Task<IActionResult> Index()
         {
-            var gymManagementDbContext = _context.Workouts.Include(w => w.Bookings);
-            return View(await gymManagementDbContext.ToListAsync());
+            return View(await _context.Workouts.ToListAsync());
         }
 
         // GET: Workouts/Details/5
@@ -35,7 +34,6 @@ namespace GymManagementDb.Controllers
             }
 
             var workouts = await _context.Workouts
-                .Include(w => w.Bookings)
                 .FirstOrDefaultAsync(m => m.WorkoutID == id);
             if (workouts == null)
             {
@@ -48,7 +46,6 @@ namespace GymManagementDb.Controllers
         // GET: Workouts/Create
         public IActionResult Create()
         {
-            ViewData["BookingID"] = new SelectList(_context.Bookings, "BookingID", "Status");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace GymManagementDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkoutID,Name,Type,Duration,BookingID")] Workouts workouts)
+        public async Task<IActionResult> Create([Bind("WorkoutID,Name,Type,Duration,TrainerID")] Workouts workouts)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +62,6 @@ namespace GymManagementDb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookingID"] = new SelectList(_context.Bookings, "BookingID", "Status", workouts.BookingID);
             return View(workouts);
         }
 
@@ -82,7 +78,6 @@ namespace GymManagementDb.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookingID"] = new SelectList(_context.Bookings, "BookingID", "Status", workouts.BookingID);
             return View(workouts);
         }
 
@@ -91,7 +86,7 @@ namespace GymManagementDb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WorkoutID,Name,Type,Duration,BookingID")] Workouts workouts)
+        public async Task<IActionResult> Edit(int id, [Bind("WorkoutID,Name,Type,Duration,TrainerID")] Workouts workouts)
         {
             if (id != workouts.WorkoutID)
             {
@@ -118,7 +113,6 @@ namespace GymManagementDb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookingID"] = new SelectList(_context.Bookings, "BookingID", "Status", workouts.BookingID);
             return View(workouts);
         }
 
@@ -131,7 +125,6 @@ namespace GymManagementDb.Controllers
             }
 
             var workouts = await _context.Workouts
-                .Include(w => w.Bookings)
                 .FirstOrDefaultAsync(m => m.WorkoutID == id);
             if (workouts == null)
             {

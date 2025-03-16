@@ -23,7 +23,7 @@ public class GymManagementDbContext : IdentityDbContext<GymManagementDbUser>
 
 public DbSet<GymManagementDb.Models.Member> Member { get; set; } = default!;
 
-public DbSet<GymManagementDb.Models.Bookings> Bookings { get; set; } = default!;
+
 
 public DbSet<GymManagementDb.Models.MembershipType> MembershipType { get; set; } = default!;
 

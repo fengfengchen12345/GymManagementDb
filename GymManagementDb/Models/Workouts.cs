@@ -20,11 +20,11 @@ namespace GymManagementDb.Models
 
         public ICollection<Member> Member { get; set; }
 
-        [ForeignKey("BookingID")]
-        public Bookings Bookings { get; set; }
+        [ForeignKey("TrainerID")]
+
+        public int TrainerID { get; set;  }
+        public Trainers Trainers { get; set; }
 
 
-        [Required]
-        public int BookingID { get; set; }
     }
 }

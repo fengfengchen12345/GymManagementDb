@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymManagementDb.Migrations
 {
     /// <inheritdoc />
-    public partial class controllers : Migration
+    public partial class ForeginKeyConstraintfix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -186,36 +186,6 @@ namespace GymManagementDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Member",
-                columns: table => new
-                {
-                    MemberID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    First_Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Last_Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Join_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MembershipTpyeID = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Phone_Number = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    TrainersTrainerID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Member", x => x.MemberID);
-                    table.ForeignKey(
-                        name: "FK_Member_MembershipType_MembershipTpyeID",
-                        column: x => x.MembershipTpyeID,
-                        principalTable: "MembershipType",
-                        principalColumn: "MembershipTypeID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Member_Trainers_TrainersTrainerID",
-                        column: x => x.TrainersTrainerID,
-                        principalTable: "Trainers",
-                        principalColumn: "TrainerID");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TrainerSpecialty",
                 columns: table => new
                 {
@@ -235,36 +205,6 @@ namespace GymManagementDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookings",
-                columns: table => new
-                {
-                    BookingID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MemberID = table.Column<int>(type: "int", nullable: false),
-                    TrainerID = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Duration = table.Column<int>(type: "int", nullable: false),
-                    Time = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bookings", x => x.BookingID);
-                    table.ForeignKey(
-                        name: "FK_Bookings_Member_MemberID",
-                        column: x => x.MemberID,
-                        principalTable: "Member",
-                        principalColumn: "MemberID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Bookings_Trainers_TrainerID",
-                        column: x => x.TrainerID,
-                        principalTable: "Trainers",
-                        principalColumn: "TrainerID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Workouts",
                 columns: table => new
                 {
@@ -273,37 +213,46 @@ namespace GymManagementDb.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    BookingID = table.Column<int>(type: "int", nullable: false)
+                    TrainerID = table.Column<int>(type: "int", nullable: false),
+                    TrainersTrainerID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Workouts", x => x.WorkoutID);
                     table.ForeignKey(
-                        name: "FK_Workouts_Bookings_BookingID",
-                        column: x => x.BookingID,
-                        principalTable: "Bookings",
-                        principalColumn: "BookingID",
+                        name: "FK_Workouts_Trainers_TrainersTrainerID",
+                        column: x => x.TrainersTrainerID,
+                        principalTable: "Trainers",
+                        principalColumn: "TrainerID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MemberWorkouts",
+                name: "Member",
                 columns: table => new
                 {
-                    MemberID = table.Column<int>(type: "int", nullable: false),
-                    WorkoutsWorkoutID = table.Column<int>(type: "int", nullable: false)
+                    MemberID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    First_Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Last_Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Join_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MembershipTpyeID = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Phone_Number = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    WorkoutsWorkoutID = table.Column<int>(type: "int", nullable: false),
+                    WorkoutID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MemberWorkouts", x => new { x.MemberID, x.WorkoutsWorkoutID });
+                    table.PrimaryKey("PK_Member", x => x.MemberID);
                     table.ForeignKey(
-                        name: "FK_MemberWorkouts_Member_MemberID",
-                        column: x => x.MemberID,
-                        principalTable: "Member",
-                        principalColumn: "MemberID",
+                        name: "FK_Member_MembershipType_MembershipTpyeID",
+                        column: x => x.MembershipTpyeID,
+                        principalTable: "MembershipType",
+                        principalColumn: "MembershipTypeID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MemberWorkouts_Workouts_WorkoutsWorkoutID",
+                        name: "FK_Member_Workouts_WorkoutsWorkoutID",
                         column: x => x.WorkoutsWorkoutID,
                         principalTable: "Workouts",
                         principalColumn: "WorkoutID",
@@ -350,28 +299,13 @@ namespace GymManagementDb.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_MemberID",
-                table: "Bookings",
-                column: "MemberID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bookings_TrainerID",
-                table: "Bookings",
-                column: "TrainerID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Member_MembershipTpyeID",
                 table: "Member",
                 column: "MembershipTpyeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Member_TrainersTrainerID",
+                name: "IX_Member_WorkoutsWorkoutID",
                 table: "Member",
-                column: "TrainersTrainerID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MemberWorkouts_WorkoutsWorkoutID",
-                table: "MemberWorkouts",
                 column: "WorkoutsWorkoutID");
 
             migrationBuilder.CreateIndex(
@@ -380,9 +314,9 @@ namespace GymManagementDb.Migrations
                 column: "TrainerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Workouts_BookingID",
+                name: "IX_Workouts_TrainersTrainerID",
                 table: "Workouts",
-                column: "BookingID");
+                column: "TrainersTrainerID");
         }
 
         /// <inheritdoc />
@@ -404,7 +338,7 @@ namespace GymManagementDb.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "MemberWorkouts");
+                name: "Member");
 
             migrationBuilder.DropTable(
                 name: "TrainerSpecialty");
@@ -416,16 +350,10 @@ namespace GymManagementDb.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Workouts");
-
-            migrationBuilder.DropTable(
-                name: "Bookings");
-
-            migrationBuilder.DropTable(
-                name: "Member");
-
-            migrationBuilder.DropTable(
                 name: "MembershipType");
+
+            migrationBuilder.DropTable(
+                name: "Workouts");
 
             migrationBuilder.DropTable(
                 name: "Trainers");
