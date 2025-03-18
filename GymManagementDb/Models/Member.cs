@@ -25,6 +25,7 @@ namespace GymManagementDb.Models
 
         [Required(ErrorMessage = "Membership Type is required.")]
         [ForeignKey("MembershipTpyeID")]
+        public int MembershipTpyeID { get; set; }
         public MembershipType MemberShipType { get; set; }
 
         [Required(ErrorMessage = "Email is required.")]
