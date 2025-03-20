@@ -4,6 +4,10 @@ using GymManagementDb.Models;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.FileSystemGlobbing;
+using GymManagementDb.Migrations;
 
 namespace GymManagementDb.Data
 {
@@ -49,23 +53,34 @@ namespace GymManagementDb.Data
             context.SaveChanges();
             var Trainers = new Trainers[]
             {
-             new Trainers { Name = "John Doe", YearsOfExperience = 5 },
-             new Trainers { Name = "Jane Smith", YearsOfExperience = 10 },
-             new Trainers { Name = "Mike Johnson", YearsOfExperience = 3 },
-             new Trainers { Name = "Samantha Lee", YearsOfExperience = 7 }
+                new Trainers { Name = "John Doe", YearsOfExperience = 5, TrainerID=1},
+                new Trainers { Name = "Jane Smith", YearsOfExperience = 6, TrainerID=2 },
+                new Trainers { Name = "Chris Johnson", YearsOfExperience = 7, TrainerID=4 },
+                new Trainers { Name = "Emily Davis", YearsOfExperience = 8, TrainerID=5},
+                new Trainers { Name = "Michael Brown", YearsOfExperience = 9, TrainerID=6 },
+                new Trainers { Name = "Sara Wilson", YearsOfExperience = 10, TrainerID=7 },
+                new Trainers { Name = "David Lee", YearsOfExperience = 11, TrainerID=8},
+                new Trainers { Name = "Rachel Green", YearsOfExperience = 12, TrainerID=9 },
+                new Trainers { Name = "Daniel Harris", YearsOfExperience = 13, TrainerID=10 },
+                new Trainers { Name = "Olivia Martinez", YearsOfExperience = 14, TrainerID=11 },
+                new Trainers { Name = "James Clark", YearsOfExperience = 15, TrainerID=12 },
+                new Trainers { Name = "Sophia Lopez", YearsOfExperience = 16, TrainerID=13},
+                new Trainers { Name = "Ethan Walker", YearsOfExperience = 17, TrainerID=14 },
+                new Trainers { Name = "Megan Lewis", YearsOfExperience = 18, TrainerID=15 },
+                new Trainers { Name = "Liam Scott", YearsOfExperience = 19, TrainerID=16 },
+                new Trainers { Name = "Ava Young", YearsOfExperience = 20, TrainerID=17 },
+                new Trainers { Name = "Lucas Adams", YearsOfExperience = 21, TrainerID=18 },
+                new Trainers { Name = "Charlotte Baker", YearsOfExperience = 22, TrainerID=19 },
+                new Trainers { Name = "Jack Evans", YearsOfExperience = 23, TrainerID=20 }
             };
-            foreach (Trainer t in Trainers)
+            foreach (Trainers t in Trainers)
             {
                 context.Trainers.Add(t);
             }
             context.SaveChanges();
-            
-
-            var MembershipType = new MembershipType[];
 
 
-
-            var membershipTypes = new MembershipType[]
+            var MembershipTypes = new MembershipType[]
             {
                 new MembershipType { MembershipTypeID = 1, Name = "Basic", Price = 29.99m, Duration = 1 },
                 new MembershipType { MembershipTypeID = 2, Name = "Premium", Price = 49.99m, Duration = 1 },
@@ -77,12 +92,59 @@ namespace GymManagementDb.Data
                 new MembershipType { MembershipTypeID = 8, Name = "Premium", Price = 799.99m, Duration = 12 },
                 new MembershipType { MembershipTypeID = 9, Name = "VIP", Price = 1499.99m, Duration = 12 }
             };
+            foreach (MembershipType l in MembershipTypes)
+            {
+                context.MembershipType.Add(l);
+            }
+            context.SaveChanges();
+
+            var TrainerSpecialty = new TrainerSpecialty[]
+            {
+                new TrainerSpecialty { SpecialtyName = "Weight Training" },
+                new TrainerSpecialty { SpecialtyName = "Cardio Fitness" },
+                new TrainerSpecialty { SpecialtyName = "Yoga" },
+                new TrainerSpecialty { SpecialtyName = "CrossFit" },
+                new TrainerSpecialty { SpecialtyName = "Pilates" }
+            };
+
+            var Workout = new Workouts[]
+            {
+                new Workouts { Name = "Morning Cardio", Type = "Cardio", Duration = 60, TrainerID = 1 },
+                new Workouts { Name = "Strength Training", Type = "Strength", Duration = 60, TrainerID = 2 },
+                new Workouts { Name = "Yoga for Flexibility", Type = "Yoga", Duration = 60, TrainerID = 3 },
+                new Workouts { Name = "CrossFit Bootcamp", Type = "CrossFit", Duration = 60, TrainerID = 4 },
+                new Workouts { Name = "HIIT Workout", Type = "HIIT", Duration = 40, TrainerID = 5 },
+                new Workouts { Name = "Pilates for Core", Type = "Pilates", Duration = 60, TrainerID = 6 },
+                new Workouts { Name = "Zumba Dance", Type = "Cardio", Duration = 60, TrainerID = 7 },
+                new Workouts { Name = "Strength & Conditioning", Type = "Strength", Duration = 75, TrainerID = 8 },
+                new Workouts { Name = "Cycling for Endurance", Type = "Cardio", Duration = 90, TrainerID =9 },
+                new Workouts { Name = "Boxing Training", Type = "Strength", Duration = 60, TrainerID = 10 }
+            };
+
+            foreach (Workouts w in Workout)
+            {
+                context.Workouts.Add(w);
+            }
 
 
 
+            GymManagementDbContext.Member.AddRange(members);
+            GymManagementDbContext.SaveChanges();
+            GymManagementDbContext.MembershipType.AddRange(MembershipTypes);
+            GymManagementDbContext.SaveChanges();
+
+            GymManagementDbContext.Trainers.AddRange(Trainers);
+            GymManagementDbContext.SaveChanges();
+            GymManagementDbContext.Trainerspecialty.AddRange(TrainerSpecialty);
+            GymManagementDbContext.SaveChanges();
+            GymManagementDbContext.Workouts.AddRange(Workout);
+            GymManagementDbContext.SaveChanges();
 
 
 
+            context.SaveChanges();
+
+            
         }
     }
 }
