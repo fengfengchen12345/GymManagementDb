@@ -37,7 +37,8 @@ namespace GymManagementDb.Models
         [Phone(ErrorMessage = "Invalid phone number format.")]
         [StringLength(15, ErrorMessage = "Phone number cannot exceed 15 characters.")]
         public string Phone_Number { get; set; }
-
+        
+        [ForeignKey("WorkoutID")]
         public Workouts Workouts { get; set; }
         [ForeignKey("WorkoutID")]
         public int WorkoutID { get; set; }
