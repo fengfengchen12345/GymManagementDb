@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GymManagementDb.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
-namespace GymManagementDb.Models
+namespace GymManagementDb.Areas.Identity.Data
 {
-    public class Member
+    public class AppUser : IdentityUser 
     {
 
-        [Key]
         public int MemberID { get; set; }
 
         [Required(ErrorMessage = "First name is required.")]
@@ -38,9 +39,10 @@ namespace GymManagementDb.Models
         [Phone(ErrorMessage = "Invalid phone number format.")]
         [StringLength(15, ErrorMessage = "Phone number cannot exceed 15 characters.")]
         public string Phone_Number { get; set; }
-        
+
         [ForeignKey("WorkoutID")]
         public Workouts Workouts { get; set; }
+        [ForeignKey("WorkoutID")]
         public int WorkoutID { get; set; }
 
 
