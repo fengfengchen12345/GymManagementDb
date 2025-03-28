@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using GymManagementDb.Areas.Identity.Data;
 
 namespace GymManagementDb.Models
 {
@@ -19,6 +20,6 @@ namespace GymManagementDb.Models
         [Required]
         [Range(0,180)]
         public int Duration { get; set; }
-        public ICollection<Member> Members { get; set; }
+        public ICollection<AppUser> Members { get; set; }
     }
 }
