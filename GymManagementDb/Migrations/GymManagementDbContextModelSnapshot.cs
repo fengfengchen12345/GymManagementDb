@@ -22,7 +22,7 @@ namespace GymManagementDb.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", b =>
+            modelBuilder.Entity("GymManagementDb.Areas.Identity.Data.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -35,17 +35,40 @@ namespace GymManagementDb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("First_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("Join_Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Last_Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MembershipTpyeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MembershipTypeID")
+                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -64,6 +87,11 @@ namespace GymManagementDb.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Phone_Number")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -74,7 +102,12 @@ namespace GymManagementDb.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int>("WorkoutID")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MembershipTypeID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -84,59 +117,9 @@ namespace GymManagementDb.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("WorkoutID");
+
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("GymManagementDb.Models.Member", b =>
-                {
-                    b.Property<int>("MemberID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MemberID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("First_Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("Join_Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Last_Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("MembershipTpyeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MembershipTypeID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Phone_Number")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<int>("WorkoutID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutsWorkoutID")
-                        .HasColumnType("int");
-
-                    b.HasKey("MemberID");
-
-                    b.HasIndex("MembershipTypeID");
-
-                    b.HasIndex("WorkoutsWorkoutID");
-
-                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("GymManagementDb.Models.MembershipType", b =>
@@ -153,9 +136,6 @@ namespace GymManagementDb.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("MembershipTypeID");
 
@@ -191,6 +171,9 @@ namespace GymManagementDb.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TrainerSpecialtyID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("YearsOfExperience")
                         .HasColumnType("decimal(18,2)");
@@ -369,7 +352,7 @@ namespace GymManagementDb.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GymManagementDb.Models.Member", b =>
+            modelBuilder.Entity("GymManagementDb.Areas.Identity.Data.AppUser", b =>
                 {
                     b.HasOne("GymManagementDb.Models.MembershipType", "MemberShipType")
                         .WithMany("Members")
@@ -379,7 +362,7 @@ namespace GymManagementDb.Migrations
 
                     b.HasOne("GymManagementDb.Models.Workouts", "Workouts")
                         .WithMany("Member")
-                        .HasForeignKey("WorkoutsWorkoutID")
+                        .HasForeignKey("WorkoutID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -421,7 +404,7 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -430,7 +413,7 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -445,7 +428,7 @@ namespace GymManagementDb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -454,7 +437,7 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

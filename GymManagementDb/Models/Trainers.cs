@@ -17,8 +17,6 @@ namespace GymManagementDb.Models
         public ICollection<Workouts> Workouts { get; set; }
 
 
-
-
         public ICollection<TrainerSpecialty> TrainerSpecialty { get; set; }
         public int TrainerSpecialtyID { get; internal set; }
     }

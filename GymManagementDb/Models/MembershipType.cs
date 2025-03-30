@@ -11,12 +11,6 @@ namespace GymManagementDb.Models
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
 
-
-        [Required]
-        [DataType(DataType.Currency)]
-        public decimal Price { get; set; }
-
-
         [Required]
         [Range(0,180)]
         public int Duration { get; set; }
