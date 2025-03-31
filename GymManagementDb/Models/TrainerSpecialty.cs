@@ -5,12 +5,13 @@ namespace GymManagementDb.Models
 {
     public class TrainerSpecialty
     {
-        internal string SpecialtyName;
+        [Required]
+        public string SpecialtyName;
 
         [Key]
         public int TrainersSpecialtyID { get; set; }
-        [ForeignKey("TrainerID")]
 
+        [ForeignKey("TrainerID")]
         public Trainers Trainers { get; set; }
 
         [Required]

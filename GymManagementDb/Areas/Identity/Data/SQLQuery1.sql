@@ -1,13 +1,13 @@
-﻿INSERT INTO Trainers( Name, YearsOfExperience, WorkoutID, TrainerSpecialtyID )
-VALUES
+﻿INSERT INTO Trainers (Name, YearsOfExperience) VALUES
+('John Doe', 5),
+('Jane Smith', 10),
+('Mark Johnson', 15),
+('Emily Davis', 8),
+('Michael Brown', 20),
+('Sarah Wilson', 12),
+('Robert Lee', 7),
+('Emma White', 9),
+('David Harris', 6),
+('Sophia Clark', 14);
 
-('John Doe', 5, 1, 1),
-('Jane Smith', 8,2, 2),
-('David Johnson', 3, 3, 3),
-('Emily Clark', 10, 4, 4),
-('Chris Lee', 7, 1, 5),
-('Sarah Brown', 4, 1, 6),
-('Michael Turner', 6, 1, 1),
-('Olivia King', 9, 1, 7),
-('Daniel White', 2, 1, 8),
-('Sophia Martinez', 11, 1, 9);
+Select * from Trainers 
