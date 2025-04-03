@@ -9,3 +9,5 @@
 ('Pilates Core', 'Pilates', 60, 4),
 ('Martial Arts Fundamentals', 'Martial Arts', 90, 9),
 ('Aerobics Fun', 'Aerobics', 45, 8);
+
+Select *from Workouts

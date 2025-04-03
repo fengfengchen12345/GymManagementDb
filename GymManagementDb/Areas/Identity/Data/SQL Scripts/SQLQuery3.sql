@@ -10,3 +10,5 @@ VALUES
 ('Family', 180),
 ('Corporate', 90),
 ('VIP', 180);
+
+Select *from MembershipType

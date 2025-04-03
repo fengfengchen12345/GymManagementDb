@@ -6,7 +6,7 @@ namespace GymManagementDb.Models
     public class TrainerSpecialty
     {
         [Required]
-        public string SpecialtyName;
+        public string SpecialtyType;
 
         [Key]
         public int TrainersSpecialtyID { get; set; }

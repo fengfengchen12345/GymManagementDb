@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using GymManagementDb.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace GymManagementDb.Models
 {
@@ -19,7 +20,7 @@ namespace GymManagementDb.Models
         [Range(0,180)]
         public int Duration { get; set; }
 
-        public ICollection<AppUser> Member { get; set; }
+        public ICollection<IdentityUser> Member { get; set; }
 
         [ForeignKey("TrainerID")]
 

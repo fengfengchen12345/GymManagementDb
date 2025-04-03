@@ -7,7 +7,7 @@ using GymManagementDb.Areas.Identity.Data;
 
 namespace GymManagementDb.Data;
 
-public class GymManagementDbContext : IdentityDbContext<AppUser>
+public class GymManagementDbContext : IdentityDbContext<IdentityUser>
 {
     private DbSet<MembershipType> membershipType = default!;
 
