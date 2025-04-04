@@ -1,4 +1,4 @@
-﻿INSERT INTO TrainerSpecialty (TrainersSpecialtyID, SpecialtyType )
+﻿INSERT INTO TrainerSpecialty (TrainerID, SpecialtyType )
 VALUES
 (1, 'Strength Training'),
 (2, 'Yoga'),

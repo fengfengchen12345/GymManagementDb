@@ -11,7 +11,7 @@ namespace GymManagementDb.Models
         public int WorkoutID { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
-        public string WorkoutName { get; set; }
+        public string name { get; set; }
 
         [Required(ErrorMessage = "Type is required.")]
         public string Type { get; set; }
@@ -20,11 +20,11 @@ namespace GymManagementDb.Models
         [Range(0,180)]
         public int Duration { get; set; }
 
-        public ICollection<IdentityUser> Member { get; set; }
+        public ICollection<IdentityUser> AspNetUsers { get; set; }
 
+        [Required]
+        public int TrainerID { get; set; }
         [ForeignKey("TrainerID")]
-
-        public int TrainerID { get; set;  }
         public Trainers Trainers { get; set; }
 
 

@@ -18,7 +18,7 @@ namespace GymManagementDb.Models
         public ICollection<Workouts> Workouts { get; set; }
 
         [Required]
-        public required ICollection<TrainerSpecialty> TrainerSpecialty { get; set; }
+        public  ICollection<TrainerSpecialty> TrainerSpecialty { get; set; }
         public int TrainerSpecialtyID { get; internal set; }
     }
 }

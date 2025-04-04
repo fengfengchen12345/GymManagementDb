@@ -1,4 +1,5 @@
-﻿INSERT INTO Trainers (TrainerSpecialtyID, Name, YearsOfExperience, TrainerID) VALUES
+﻿INSERT INTO Trainers (TrainerSpecialtyID, Name, YearsOfExperience
+) VALUES
 (1, 'John Doe', 5),
 (2, 'Jane Smith', 10),
 (3, 'Mark Johnson', 15),

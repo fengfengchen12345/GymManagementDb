@@ -12,9 +12,8 @@ namespace GymManagementDb.Models
         public int TrainersSpecialtyID { get; set; }
 
         [ForeignKey("TrainerID")]
-        public Trainers Trainers { get; set; }
-
-        [Required]
         public int TrainerID { get; set; }
+        [ForeignKey("TrainerID")]
+        public Trainers Trainers { get; set; }
     }
 }
