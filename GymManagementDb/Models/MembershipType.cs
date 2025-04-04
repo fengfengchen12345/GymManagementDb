@@ -10,11 +10,11 @@ namespace GymManagementDb.Models
         public int MembershipTypeID { get; set; }
 
         [Required(ErrorMessage = "Name is required.")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required]
         [Range(0,180)]
         public int Duration { get; set; }
-        public ICollection<IdentityUser> Members { get; set; }
+        public required ICollection<IdentityUser> Members { get; set; }
     }
 }

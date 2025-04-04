@@ -13,11 +13,12 @@ namespace GymManagementDb.Models
 
         [Range(0, 50)]
         public decimal YearsOfExperience { get; set; }
-
+        
+        [Required]
         public ICollection<Workouts> Workouts { get; set; }
 
-
-        public ICollection<TrainerSpecialty> TrainerSpecialty { get; set; }
+        [Required]
+        public required ICollection<TrainerSpecialty> TrainerSpecialty { get; set; }
         public int TrainerSpecialtyID { get; internal set; }
     }
 }

@@ -1,4 +1,4 @@
-INSERT INTO IdentityUser (Id, First_Name, Last_Name, Join_Date, MembershipTpyeID, Email, Phone_Number, WorkoutID)
+INSERT INTO AspNetUsers (Id, First_Name, Last_Name, Join_Date, MembershipTpyeID, Email, Phone_Number, WorkoutID)
 VALUES
 ('user1', 'Mark', 'Smith', '2025-01-01', 1, 'mark.smith@example.com', '1234567890', 1),
 ('user2', 'Sarah', 'Johnson', '2025-02-15', 2, 'sarah.johnson@example.com', '2345678901', 2),

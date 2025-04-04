@@ -5,8 +5,8 @@ namespace GymManagementDb.Models
 {
     public class TrainerSpecialty
     {
-        [Required]
-        public string SpecialtyType;
+        [Required(ErrorMessage = "SpecialtyType is required")]
+        public string SpecialtyType { get; set; } 
 
         [Key]
         public int TrainersSpecialtyID { get; set; }

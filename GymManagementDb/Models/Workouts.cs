@@ -11,7 +11,7 @@ namespace GymManagementDb.Models
         public int WorkoutID { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
-        public string Name { get; set; }
+        public string WorkoutName { get; set; }
 
         [Required(ErrorMessage = "Type is required.")]
         public string Type { get; set; }
