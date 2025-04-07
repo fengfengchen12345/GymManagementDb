@@ -8,13 +8,12 @@ using GymManagementDb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PeScheduleDB.Areas.Identity.Data;
 
 namespace GymManagementDb.Areas.Identity.Data;
 
 // Add profile data for application users by adding properties to the GymManagementDbUser class
-public class GymManagementDbUser : IdentityUser
-
-
+public class GymManagementDbUser : IdentityDbContext<ScheduleUser>
 {
     public int MemberID { get; set; }
 
