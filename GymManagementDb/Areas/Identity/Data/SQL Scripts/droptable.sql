@@ -1,2 +1,3 @@
-﻿ALTER table Workouts
-Drop Column TrainersTrainerID
+﻿ALTER TABLE Workouts
+ADD CONSTRAINT FK_Workouts_Trainers
+FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID);
