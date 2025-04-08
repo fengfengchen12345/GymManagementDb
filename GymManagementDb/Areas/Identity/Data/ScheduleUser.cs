@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace PeScheduleDB.Areas.Identity.Data;
+namespace GymManagementDb.Areas.Identity.Data;
 
 public class ScheduleUser : IdentityUser
 {
