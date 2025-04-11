@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using GymManagementDb.Areas.Identity.Data;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace GymManagementDb.Models
@@ -15,6 +15,6 @@ namespace GymManagementDb.Models
         [Required]
         [Range(0,180)]
         public int Duration { get; set; }
-        public ICollection<IdentityUser> AspNetUsers { get; set; }
+        public ICollection<GymManagementDbUser> AspNetUsers { get; set; }
     }
 }

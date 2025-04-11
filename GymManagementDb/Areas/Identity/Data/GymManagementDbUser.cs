@@ -9,14 +9,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GymManagementDb.Areas.Identity.Data;
+namespace GymManagementDb.Models;
 
 // Add profile data for application users by adding properties to the GymManagementDbUser class
 public class GymManagementDbUser : IdentityUser
 
 
 {
-    //public int MemberID { get; set; }
 
     [Required(ErrorMessage = "First name is required.")]
     [StringLength(100, ErrorMessage = "First name cannot exceed 100 characters.")]
