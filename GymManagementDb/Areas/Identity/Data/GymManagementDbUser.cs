@@ -6,13 +6,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using GymManagementDb.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagementDb.Models;
 
-// Add profile data for application users by adding properties to the GymManagementDbUser class
-public class GymManagementDbUser : IdentityUser
+public class GymManagementDbContext : IdentityDbContext<>
+{
+
+    public GymManagementDbContext(DbContextOptions<GymManagementDbContext> options)
+        : base(options)
+    {
+    }
+
+
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<MembershipType>().ToTable("MembershipType");
+        builder.Entity<Trainers>().ToTable("Trainers");
+        builder.Entity<TrainerSpecialty>().ToTable("TrainerSpecialty");
+        builder.Entity<Workouts>().ToTable("Workouts");
+    }
+
+    // Add profile data for application users by adding properties to the GymManagementDbUser class
+    public class GymManagementDbUser : IdentityUser
 
 
 {
