@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using GymManagementDb.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 
 namespace GymManagementDb.Models

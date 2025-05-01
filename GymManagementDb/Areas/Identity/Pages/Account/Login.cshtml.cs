@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using GymManagementDb.Models;
+using GymManagementDb.Areas.Identity.Data;
 
 namespace GymManagementDb.Areas.Identity.Pages.Account
 {

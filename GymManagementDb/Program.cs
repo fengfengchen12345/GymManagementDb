@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using GymManagementDb.Data;
-using GymManagementDb.Models;
+using GymManagementDb.Areas.Identity.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
