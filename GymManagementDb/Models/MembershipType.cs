@@ -15,6 +15,7 @@ namespace GymManagementDb.Models
         [Required]
         [Range(0,180)]
         public int Duration { get; set; }
-        public ICollection<GymManagementDbUser> AspNetUsers { get; set; }
+        public ICollection<GymManagementDbUser> Member { get; set; }
+
     }
 }

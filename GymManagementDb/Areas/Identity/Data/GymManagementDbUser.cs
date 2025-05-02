@@ -30,6 +30,7 @@ namespace GymManagementDb.Areas.Identity.Data;
     [Required(ErrorMessage = "Membership Type is required.")]
     [ForeignKey("MembershipTpyeID")]
     public int MembershipTpyeID { get; set; }
+    [ForeignKey("MembershipTpyeID")]
     public MembershipType MemberShipType { get; set; }
 
     [Required(ErrorMessage = "Email is required.")]

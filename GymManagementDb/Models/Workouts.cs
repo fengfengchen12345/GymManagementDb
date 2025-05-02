@@ -24,7 +24,7 @@ namespace GymManagementDb.Models
         [ForeignKey("TrainerID")]
         public int TrainerID { get; set; }
         [ForeignKey("TrainerID")]
-        public Trainers Trainers { get; internal set; }
+        public Trainers Trainers { get; set; }
 
 
     }
