@@ -27,11 +27,7 @@ namespace GymManagementDb.Areas.Identity.Data;
     public DateTime Join_Date { get; set; }
 
 
-    [Required(ErrorMessage = "Membership Type is required.")]
-    [ForeignKey("MembershipTpyeID")]
-    public int MembershipTpyeID { get; set; }
-    [ForeignKey("MembershipTpyeID")]
-    public MembershipType MemberShipType { get; set; }
+  
 
     [Required(ErrorMessage = "Email is required.")]
     [EmailAddress(ErrorMessage = "Invalid email format.")]

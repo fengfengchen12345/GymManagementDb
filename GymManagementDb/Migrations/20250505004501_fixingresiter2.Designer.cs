@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagementDb.Migrations
 {
     [DbContext(typeof(GymManagementDbContext))]
-    [Migration("20250411015741_updatedmodels")]
-    partial class updatedmodels
+    [Migration("20250505004501_fixingresiter2")]
+    partial class fixingresiter2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace GymManagementDb.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GymManagementDb.Models.GymManagementDbUser", b =>
+            modelBuilder.Entity("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -64,10 +64,7 @@ namespace GymManagementDb.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("MembershipTpyeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MembershipTypeID")
+                    b.Property<int?>("MembershipTypeID")
                         .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
@@ -139,7 +136,7 @@ namespace GymManagementDb.Migrations
 
                     b.HasKey("MembershipTypeID");
 
-                    b.ToTable("MembershipType");
+                    b.ToTable("MembershipType", (string)null);
                 });
 
             modelBuilder.Entity("GymManagementDb.Models.TrainerSpecialty", b =>
@@ -161,7 +158,7 @@ namespace GymManagementDb.Migrations
 
                     b.HasIndex("TrainerID");
 
-                    b.ToTable("TrainerSpecialty");
+                    b.ToTable("TrainerSpecialty", (string)null);
                 });
 
             modelBuilder.Entity("GymManagementDb.Models.Trainers", b =>
@@ -184,7 +181,7 @@ namespace GymManagementDb.Migrations
 
                     b.HasKey("TrainerID");
 
-                    b.ToTable("Trainers");
+                    b.ToTable("Trainers", (string)null);
                 });
 
             modelBuilder.Entity("GymManagementDb.Models.Workouts", b =>
@@ -213,7 +210,7 @@ namespace GymManagementDb.Migrations
 
                     b.HasIndex("TrainerID");
 
-                    b.ToTable("Workouts");
+                    b.ToTable("Workouts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -353,21 +350,17 @@ namespace GymManagementDb.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GymManagementDb.Models.GymManagementDbUser", b =>
+            modelBuilder.Entity("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", b =>
                 {
-                    b.HasOne("GymManagementDb.Models.MembershipType", "MemberShipType")
-                        .WithMany("AspNetUsers")
-                        .HasForeignKey("MembershipTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("GymManagementDb.Models.MembershipType", null)
+                        .WithMany("Member")
+                        .HasForeignKey("MembershipTypeID");
 
                     b.HasOne("GymManagementDb.Models.Workouts", "Workouts")
                         .WithMany("Member")
                         .HasForeignKey("WorkoutID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("MemberShipType");
 
                     b.Navigation("Workouts");
                 });
@@ -405,7 +398,7 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("GymManagementDb.Models.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -414,7 +407,7 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("GymManagementDb.Models.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -429,7 +422,7 @@ namespace GymManagementDb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GymManagementDb.Models.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -438,7 +431,7 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("GymManagementDb.Models.GymManagementDbUser", null)
+                    b.HasOne("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -447,7 +440,7 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("GymManagementDb.Models.MembershipType", b =>
                 {
-                    b.Navigation("AspNetUsers");
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("GymManagementDb.Models.Trainers", b =>

@@ -4,6 +4,7 @@ using GymManagementDb.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymManagementDb.Migrations
 {
     [DbContext(typeof(GymManagementDbContext))]
-    partial class GymManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250504235557_fixingregister")]
+    partial class fixingregister
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,10 @@ namespace GymManagementDb.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("MembershipTypeID")
+                    b.Property<int>("MembershipTpyeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MembershipTypeID")
                         .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
@@ -349,15 +355,19 @@ namespace GymManagementDb.Migrations
 
             modelBuilder.Entity("GymManagementDb.Areas.Identity.Data.GymManagementDbUser", b =>
                 {
-                    b.HasOne("GymManagementDb.Models.MembershipType", null)
+                    b.HasOne("GymManagementDb.Models.MembershipType", "MemberShipType")
                         .WithMany("Member")
-                        .HasForeignKey("MembershipTypeID");
+                        .HasForeignKey("MembershipTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GymManagementDb.Models.Workouts", "Workouts")
                         .WithMany("Member")
                         .HasForeignKey("WorkoutID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("MemberShipType");
 
                     b.Navigation("Workouts");
                 });
