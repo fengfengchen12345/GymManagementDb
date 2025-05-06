@@ -14,12 +14,10 @@ namespace GymManagementDb.Areas.Identity.Data;
 
     [Required(ErrorMessage = "First name is required.")]
     [StringLength(100, ErrorMessage = "First name cannot exceed 100 characters.")]
-    public string First_Name { get; set; }
-
+    public string FirstName { get; set; }
     [Required(ErrorMessage = "Last name is required.")]
     [StringLength(100, ErrorMessage = "Last name cannot exceed 100 characters.")]
-    public string Last_Name { get; set; }
-
+    public string LastName { get; set; }
 
     [Required(ErrorMessage = "Join Date is required.")]
     [DataType(DataType.Date)]
@@ -37,7 +35,7 @@ namespace GymManagementDb.Areas.Identity.Data;
     [Required(ErrorMessage = "Phone number is required.")]
     [Phone(ErrorMessage = "Invalid phone number format.")]
     [StringLength(15, ErrorMessage = "Phone number cannot exceed 15 characters.")]
-    public string Phone_Number { get; set; }
+    public string Phone { get; set; }
 
     [ForeignKey("WorkoutID")]
     public Workouts Workouts { get; set; }

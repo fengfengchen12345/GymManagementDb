@@ -22,7 +22,6 @@ public class GymManagementDbContext : IdentityDbContext<GymManagementDbUser>
         builder.Entity<TrainerSpecialty>().ToTable("TrainerSpecialty");
         builder.Entity<Workouts>().ToTable("Workouts");
     }
-    private DbSet<MembershipType> membershipType = default!;
     public DbSet<GymManagementDb.Areas.Identity.Data.GymManagementDbUser> GymManagementDbUser { get; set; } = default!;
     public DbSet<GymManagementDb.Models.MembershipType> MembershipType { get; set; } = default!;
     public DbSet<GymManagementDb.Models.Trainers> Trainers { get; set; } = default!;
