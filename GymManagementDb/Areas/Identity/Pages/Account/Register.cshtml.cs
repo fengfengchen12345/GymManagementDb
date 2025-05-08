@@ -74,6 +74,10 @@ namespace GymManagementDb.Areas.Identity.Pages.Account
             [Required, MinLength(1), MaxLength(20), RegularExpression(@"^\+?\d{1,3}[- ]?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$", ErrorMessage = "Phone Number required.")]
             public string Phone { get; set; }
 
+            [Required(ErrorMessage = "Workout selection is required.")]
+            [Display(Name = "Workout")]
+            public int WorkoutID { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -116,6 +120,8 @@ namespace GymManagementDb.Areas.Identity.Pages.Account
                 user.FirstName = Input.Firstname;
                 user.LastName = Input.Lastname;
                 user.Phone = Input.Phone;
+                user.Email = Input.Email;
+                user.WorkoutID = 1;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
