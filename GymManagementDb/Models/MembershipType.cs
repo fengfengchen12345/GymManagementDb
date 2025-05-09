@@ -13,9 +13,14 @@ namespace GymManagementDb.Models
         public string Name { get; set; }
 
         [Required]
+        public int Cost { get; set; }
+
+        [Required]
         [Range(0,180)]
         public int Duration { get; set; }
         public ICollection<GymManagementDbUser> Member { get; set; }
+
+        
 
     }
 }
