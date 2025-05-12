@@ -1,5 +1,5 @@
-﻿@model GymManagementDb.Models.TrainerSpecialty
-
+﻿
+@model GymManagementDb.Models.TrainerSpecialty
 @{
     ViewData["Title"] = "Details";
 }
@@ -15,6 +15,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Trainers.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SpecialtyType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SpecialtyType)
         </dd>
     </dl>
 </div>
