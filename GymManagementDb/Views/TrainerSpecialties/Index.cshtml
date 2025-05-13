@@ -13,23 +13,30 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Trainers)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Trainers.Name)  <!-- Adjust this if needed -->
             </th>
-            <th></th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().SpecialtyType)  <!-- Adjust this if needed -->
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trainers.Name)
-            </td>
-            <td>
-                    <a class="btn btn-warning"  asp-action="Edit" asp-route-id="@item.TrainersSpecialtyID">Edit</a> |
-                    <a class="btn btn-info"  asp-action="Details" asp-route-id="@item.TrainersSpecialtyID">Details</a> |
-                    <a class="btn btn-danger"  asp-action="Delete" asp-route-id="@item.TrainersSpecialtyID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainers.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialtyType)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.TrainersSpecialtyID">Edit</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.TrainersSpecialtyID">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.TrainersSpecialtyID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

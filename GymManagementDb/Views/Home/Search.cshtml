@@ -1,0 +1,25 @@
+﻿@page
+@model GymManagementDb.Views.Home.SearchModel
+@{
+}
+@{
+    ViewBag.Title = "Search Results";
+    var query = ViewBag.Query as string;
+    var results = ViewBag.Results as List<string>;
+}
+
+<h2>Results for "@query"</h2>
+
+@if (results != null && results.Any())
+{
+    <ul>
+        @foreach (var result in results)
+        {
+            <li>@result</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No results found.</p>
+}

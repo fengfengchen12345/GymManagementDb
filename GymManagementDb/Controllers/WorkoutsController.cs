@@ -14,10 +14,19 @@ namespace GymManagementDb.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Search(string x)
+        {
+            var y = await _context.Workouts
+                                  .Where(a => a.Name == x)
+                                  .ToListAsync();
+
+            return View("Index", y);
+        }
+
         // GET: Workouts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Workouts.ToListAsync());
+            return View(await _context.Workouts.Include(a => a.Trainers).ToArrayAsync());
         }
 
         // GET: Workouts/Details/5
