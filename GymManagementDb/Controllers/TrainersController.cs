@@ -2,11 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using GymManagementDb.Models;
 using GymManagementDb.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GymManagementDb.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TrainersController : Controller
     {
+        
         private readonly GymManagementDbContext _context;
 
         public TrainersController(GymManagementDbContext context)

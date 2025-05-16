@@ -1,12 +1,69 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-</div>
-    
-<form asp-action="Search" asp-controller="Workouts">
-    <input type="text" name="x" placeholder="Search..." />
-    <button type="submit">Search</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <style>
+        .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px; /* Adds space between the input and the button */
+        margin-top: 20px;
+        }
+
+        .search-input {
+        width: 300px; /* Adjust the width as needed */
+        padding: 12px; /* Adds padding inside the input box */
+        font-size: 18px; /* Increases text size */
+        height: 40px; /* Increases the height of the input */
+        border-radius: 5px; /* Optional, for rounded corners */
+        border: 1px solid #ccc; /* Optional, for border styling */
+        }
+
+        .search-button {
+        padding: 12px 20px; /* Increases button size */
+        font-size: 18px; /* Makes the button text bigger */
+        background-color: #007bff; /* Button background color */
+        color: white; /* Button text color */
+        border: none; /* Removes border */
+        border-radius: 5px; /* Optional, for rounded corners */
+        cursor: pointer; /* Changes cursor to pointer when hovering */
+        }
+
+        .search-button:hover {
+        background-color: #0056b3; /* Darker blue when hovering */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+
+    <form asp-action="Search" asp-controller="Workouts" class="search-form">
+        <input type="text" name="x" placeholder="Search Workouts..." class="search-input" />
+        <button type="submit" class="search-button">Search</button>
+    </form>
+
+</body>
+</html>
+
+@if(User.IsInRole("Admin"))
+{
+    <h1> Hi Admin</h1>
+
+} else
+{
+}
