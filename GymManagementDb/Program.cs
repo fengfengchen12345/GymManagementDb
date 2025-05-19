@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("GymManagementDbContextConnection") ?? throw new InvalidOperationException("Connection string 'GymManagementDbContextConnection' not found.");
 
-builder.Services.AddDbContext<GymManagementDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDbContext<GymManagementDbContext>(options =>
+    options.UseSqlServer(connectionString, sqlOptions =>
+        sqlOptions.EnableRetryOnFailure()));
 
 builder.Services.AddDefaultIdentity<GymManagementDbUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
@@ -50,7 +53,7 @@ using (var scope = app.Services.CreateScope())
 
 using (var scope = app.Services.CreateScope())
 {
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<GymManagementDbUser>>();
 
     string adminEmail = "admin@gmail.com";
     string adminPassword = "Password123!";
@@ -63,6 +66,7 @@ using (var scope = app.Services.CreateScope())
         user.FirstName = "Test";
         user.LastName = "Admin";
         user.Phone = "1234567890";
+        user.WorkoutID = 1;
 
         await userManager.CreateAsync(user, adminPassword);
         await userManager.AddToRoleAsync(user, "Admin");
