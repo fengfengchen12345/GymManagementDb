@@ -4,20 +4,17 @@ using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("GymManagementDbContextConnection") ?? throw new InvalidOperationException("Connection string 'GymManagementDbContextConnection' not found.");
-
-
 builder.Services.AddDbContext<GymManagementDbContext>(options =>
-    options.UseSqlServer(connectionString, sqlOptions =>
-        sqlOptions.EnableRetryOnFailure()));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("GymManagementDbContext") ?? throw new InvalidOperationException("Connection string 'GymManagementDbContext' not found.")));
+
 
 builder.Services.AddDefaultIdentity<GymManagementDbUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<GymManagementDbContext>();
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<GymManagementDbContext>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
