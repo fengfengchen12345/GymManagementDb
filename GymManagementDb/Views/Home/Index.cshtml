@@ -1,83 +1,61 @@
-﻿@using Microsoft.AspNetCore.Identity
-
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
+<div class="container mt-5">
 
-    <style>
-        .search-form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px; /* Adds space between the input and the button */
-        margin-top: 20px;
-        }
-
-        .search-input {
-        width: 300px; /* Adjust the width as needed */
-        padding: 12px; /* Adds padding inside the input box */
-        font-size: 18px; /* Increases text size */
-        height: 40px; /* Increases the height of the input */
-        border-radius: 5px; /* Optional, for rounded corners */
-        border: 1px solid #ccc; /* Optional, for border styling */
-        }
-
-        .search-button {
-        padding: 12px 20px; /* Increases button size */
-        font-size: 18px; /* Makes the button text bigger */
-        background-color: #007bff; /* Button background color */
-        color: white; /* Button text color */
-        border: none; /* Removes border */
-        border-radius: 5px; /* Optional, for rounded corners */
-        cursor: pointer; /* Changes cursor to pointer when hovering */
-        }
-
-        .search-button:hover {
-        background-color: #0056b3; /* Darker blue when hovering */
-        }
-    </style>
-</head>
-<body>
-
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
+    <!-- Welcome Banner -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 mb-3">Welcome to GymManagement</h1>
+        <p class="lead mb-4">Your complete solution to manage workouts, memberships, and trainers with ease!</p>
+        <a asp-controller="MembershipTypes" asp-action="Index" class="btn btn-primary btn-lg me-2">Join Now</a>
+        <a asp-controller="Workouts" asp-action="Index" class="btn btn-outline-primary btn-lg">View Workouts</a>
     </div>
 
-    <form asp-action="Search" asp-controller="Workouts" class="search-form">
-        <input type="text" name="x" placeholder="Search Workouts..." class="search-input" />
-        <button type="submit" class="search-button">Search</button>
+    <!-- Search Workouts -->
+    <form asp-action="Search" asp-controller="Workouts" class="d-flex justify-content-center mb-5" role="search" aria-label="Search Workouts">
+        <input type="search" name="x" placeholder="Search Workouts..." class="form-control w-50 me-2" aria-label="Search workouts" />
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
-</body>
-</html>
-
-
-<div class="text-center">
-    <h1 class="display-4">Welcome to GymManagement</h1>
-    <div id="GymImages" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#GymImages" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#GymImages" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#GymImages" data-bs-slide-to="2"></button>
+    <!-- Features / Benefits -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Why Choose Us?</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-speedometer2 display-4 text-primary mb-3"></i>
+                <h5>Easy Workout Management</h5>
+                <p>Track and organize your workouts effortlessly with our intuitive platform.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-people-fill display-4 text-primary mb-3"></i>
+                <h5>Certified Trainers</h5>
+                <p>Work with professional trainers committed to helping you reach your goals.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="bi bi-calendar2-check-fill display-4 text-primary mb-3"></i>
+                <h5>Flexible Memberships</h5>
+                <p>Choose plans tailored to your needs and lifestyle.</p>
+            </div>
         </div>
-        <div class="carousel-inner">
+    </section>
+
+    <!-- Image Carousel -->
+    <div id="GymImages" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#GymImages" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#GymImages" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#GymImages" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded shadow-sm">
             <div class="carousel-item active">
-                <img src="/Images/trainers.webp" class="d-block mx-auto w-50" alt="Trainers">
+                <img src="/Images/trainers.webp" class="d-block mx-auto w-75" alt="Trainers">
             </div>
             <div class="carousel-item">
-                <img src="/Images/workouts.jpeg" class="d-block mx-auto w-50" alt="Workouts">
+                <img src="/Images/workouts.jpeg" class="d-block mx-auto w-75" alt="Workouts">
             </div>
             <div class="carousel-item">
-                <img src="/Images/gym.jpg" class="d-block mx-auto w-50" alt="gym">
+                <img src="/Images/gym.jpg" class="d-block mx-auto w-75" alt="Gym">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#GymImages" data-bs-slide="prev">
@@ -90,26 +68,127 @@
         </button>
     </div>
 
+    <!-- Cards Section -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Explore Our Services</h2>
+        <div class="row g-4 justify-content-center">
 
-    <div class="card" style="width: 18rem; margin-top: 250px;">
-        <!-- Added margin-top -->
-        <a asp-controller="MembershipTypes" asp-action="Index">
-            <img src="~/Images/membershiptypes.jpg" class="card-img-top" alt="MembershipTypes">
-        </a>
+            <div class="col-sm-6 col-md-4">
+                <a asp-controller="MembershipTypes" asp-action="Index" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm">
+                        <img src="~/Images/membershiptypes.jpg" class="card-img-top" alt="Membership Types" />
+                        <div class="card-body">
+                            <h5 class="card-title">Membership Types</h5>
+                            <p class="card-text">Choose from flexible membership plans that fit your lifestyle.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-        <div class="card-body">
-            <h5 class="card-title" style="color:black">Rooms</h5>
-            <p class="card-text" style="color:black">All MembershipTypes at the gym.</p>
+            <div class="col-sm-6 col-md-4">
+                <a asp-controller="Trainers" asp-action="Index" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm">
+                        <img src="~/Images/trainers.webp" class="card-img-top" alt="Trainers" />
+                        <div class="card-body">
+                            <h5 class="card-title">Meet Our Trainers</h5>
+                            <p class="card-text">Professional trainers ready to guide and motivate you.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+                <a asp-controller="Workouts" asp-action="Index" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm">
+                        <img src="~/Images/workouts.jpeg" class="card-img-top" alt="Workouts" />
+                        <div class="card-body">
+                            <h5 class="card-title">Workout Library</h5>
+                            <p class="card-text">Browse a wide variety of workouts tailored for all levels.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
         </div>
-    </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="mb-5 bg-light p-5 rounded">
+        <h2 class="text-center mb-4">What Our Members Say</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-4">“GymManagement helped me stay motivated and on track with my fitness goals. The trainers are amazing!”</p>
+                    <footer class="blockquote-footer">Sarah T.</footer>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News / Blog -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Latest News</h2>
+        <div class="list-group w-75 mx-auto">
+            <a href="#" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">New Workout Programs Launched</h5>
+                <p class="mb-1">Check out our latest workout plans designed for all fitness levels.</p>
+                <small>May 20, 2025</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Summer Special Discounts</h5>
+                <p class="mb-1">Sign up now and get up to 20% off on all memberships!</p>
+                <small>May 10, 2025</small>
+            </a>
+        </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="mb-5">
+        <h2 class="text-center mb-4">Upcoming Events</h2>
+        <ul class="list-group w-75 mx-auto">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Yoga Workshop
+                <span class="badge bg-primary rounded-pill">June 5, 2025</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                HIIT Bootcamp
+                <span class="badge bg-primary rounded-pill">June 12, 2025</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Nutrition Seminar
+                <span class="badge bg-primary rounded-pill">June 20, 2025</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="mb-5 bg-primary text-white p-5 rounded text-center">
+        <h2 class="mb-3">Subscribe to Our Newsletter</h2>
+        <p>Get fitness tips, news, and special offers delivered straight to your inbox.</p>
+        <form class="d-flex justify-content-center" asp-controller="Newsletter" asp-action="Subscribe" method="post" role="form">
+            <input type="email" name="email" placeholder="Enter your email" required class="form-control w-50 me-2" aria-label="Email address" />
+            <button type="submit" class="btn btn-light">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Contact & Social Links -->
+    <footer class="text-center mb-5">
+        <p>Contact us: <a href="mailto:info@gymmanagement.com">info@gymmanagement.com</a> | Phone: (123) 456-7890</p>
+        <div>
+            <a href="#" class="text-decoration-none me-3"><i class="bi bi-facebook fs-3"></i></a>
+            <a href="#" class="text-decoration-none me-3"><i class="bi bi-instagram fs-3"></i></a>
+            <a href="#" class="text-decoration-none"><i class="bi bi-twitter fs-3"></i></a>
+        </div>
+        <small class="d-block mt-3">&copy; 2025 GymManagement</small>
+    </footer>
+
 </div>
 
-
-
-@if(User.IsInRole("Admin"))
+@if (User.IsInRole("Admin"))
 {
     <h1> Hi Admin</h1>
 
-} else
+}
+else
 {
 }
