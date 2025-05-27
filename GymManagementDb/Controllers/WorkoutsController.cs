@@ -19,9 +19,8 @@ namespace GymManagementDb.Controllers
         public async Task<IActionResult> Search(string x)
         {
             var y = await _context.Workouts
-                                  .Where(a => a.Name == x)
-                                  .ToListAsync();
-
+                      .Where(a => a.Name.Contains(x))
+                      .ToListAsync();
             return View("Index", y);
         }
 
